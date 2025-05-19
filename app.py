@@ -12509,7 +12509,7 @@ code = ("", "^NSEI","^BSESN","20MICRONS.NS",
 "ZYDUSLIFE.BO",
 "ZYDUSWELL.BO")
 
-today = datetime.datetime.today()
+today = datetime.today()
 if today.weekday() == 5:  # Saturday
     days_to_fetch = '3d'
 elif today.weekday() == 6:  # Sunday
