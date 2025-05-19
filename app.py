@@ -12510,22 +12510,22 @@ code = ("", "^NSEI","^BSESN","20MICRONS.NS",
 "ZYDUSWELL.BO")
 
 nifty = yf.Ticker('^NSEI')
-currentN = nifty.history(period='1d')\['Close'].iloc\[-1]
-lastN = nifty.history(period='2d')\['Close'].iloc\[-2]
+currentN = nifty.history(period='1d')['Close'].iloc[-1]
+lastN = nifty.history(period='2d')['Close'].iloc[-2]
 changeN = currentN - lastN
-percentage\_changeN = (changeN / lastN) \* 100
-current\_formattedN = f"₹{currentN:.2f}"
-change\_formattedN = f"{changeN:.2f}"
-percentage\_change\_formattedN = f"{percentage\_changeN:.2f}%"
+percentage_changeN = (changeN / lastN) * 100
+current_formattedN = f"₹{currentN:.2f}"
+change_formattedN = f"{changeN:.2f}"
+percentage_change_formattedN = f"{percentage_changeN:.2f}%"
 
 sensex = yf.Ticker('^BSESN')
-currentS = sensex.history(period='1d')\['Close'].iloc\[-1]
-lastS = sensex.history(period='2d')\['Close'].iloc\[-2]
+currentS = sensex.history(period='1d')['Close'].iloc[-1]
+lastS = sensex.history(period='2d')['Close'].iloc[-2]
 changeS = currentS - lastS
-percentage\_changeS = (changeS / lastS) \* 100
-current\_formattedS = f"₹{currentS:.2f}"
-change\_formattedS = f"{changeS:.2f}"
-percentage\_change\_formattedS = f"{percentage\_changeS:.2f}%" 
+percentage_changeS = (changeS / lastS) * 100
+current_formattedS = f"₹{currentS:.2f}"
+change_formattedS = f"{changeS:.2f}"
+percentage_change_formattedS = f"{percentage_changeS:.2f}%" 
 
 if not selected == "HELP":
     selected_company = st.selectbox("\n\nSearch for a Company", company)
