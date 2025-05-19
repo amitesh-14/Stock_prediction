@@ -12509,23 +12509,42 @@ code = ("", "^NSEI","^BSESN","20MICRONS.NS",
 "ZYDUSLIFE.BO",
 "ZYDUSWELL.BO")
 
+today = datetime.datetime.today()
+if today.weekday() == 5:  # Saturday
+    days_to_fetch = '3d'
+elif today.weekday() == 6:  # Sunday
+    days_to_fetch = '4d'
+else:
+    days_to_fetch = '2d'  # Normal weekdays
+
+
 nifty = yf.Ticker('^NSEI')
-currentN = nifty.history(period='1d')['Close'].iloc[-1]
-lastN = nifty.history(period='2d')['Close'].iloc[-2]
-changeN = currentN - lastN
-percentage_changeN = (changeN / lastN) * 100
-current_formattedN = f"₹{currentN:.2f}"
-change_formattedN = f"{changeN:.2f}"
-percentage_change_formattedN = f"{percentage_changeN:.2f}%"
+nifty_data = nifty.history(period=days_to_fetch).dropna()
+
+if len(nifty_data) >= 2:
+    currentN = nifty_data['Close'].iloc[-1]
+    lastN = nifty_data['Close'].iloc[-2]
+    changeN = currentN - lastN
+    percentage_changeN = (changeN / lastN) * 100
+    current_formattedN = f"₹{currentN:.2f}"
+    change_formattedN = f"{changeN:.2f}"
+    percentage_change_formattedN = f"{percentage_changeN:.2f}%"
+else:
+    current_formattedN = change_formattedN = percentage_change_formattedN = "N/A"
 
 sensex = yf.Ticker('^BSESN')
-currentS = sensex.history(period='1d')['Close'].iloc[-1]
-lastS = sensex.history(period='2d')['Close'].iloc[-2]
-changeS = currentS - lastS
-percentage_changeS = (changeS / lastS) * 100
-current_formattedS = f"₹{currentS:.2f}"
-change_formattedS = f"{changeS:.2f}"
-percentage_change_formattedS = f"{percentage_changeS:.2f}%"
+sensex_data = sensex.history(period=days_to_fetch).dropna()
+
+if len(sensex_data) >= 2:
+    currentS = sensex_data['Close'].iloc[-1]
+    lastS = sensex_data['Close'].iloc[-2]
+    changeS = currentS - lastS
+    percentage_changeS = (changeS / lastS) * 100
+    current_formattedS = f"₹{currentS:.2f}"
+    change_formattedS = f"{changeS:.2f}"
+    percentage_change_formattedS = f"{percentage_changeS:.2f}%"
+else:
+    current_formattedS = change_formattedS = percentage_change_formattedS = "N/A"
 
 if not selected == "HELP":
     selected_company = st.selectbox("\n\nSearch for a Company", company)
